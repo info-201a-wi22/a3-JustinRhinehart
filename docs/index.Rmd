@@ -1,0 +1,29 @@
+---
+title: "SomethingIGottaChangeBeforeISumbitThis"
+output: html_document
+---
+
+
+<!-- Source File -->
+```{r, source, echo = FALSE, warning=FALSE, include=FALSE}
+source("../source/analysis.R")
+```
+<!-- General Info -->
+* **Author:** Justin Rhinehart @ jjrhine@uw.edu
+* **Affiliation:** INFO-201: Technical Foundations of Informatics - The Information School - University of Washington
+* **Date:** Winter 2022
+
+<!-- Introduction -->
+
+
+<!-- Summary Paragraph -->
+
+
+<!-- Trend Chart -->
+
+
+<!-- Compare Chart -->
+
+
+<!-- Map -->
+
