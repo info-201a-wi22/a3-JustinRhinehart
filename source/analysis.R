@@ -3,9 +3,10 @@ library(ggplot2)
 library(leaflet)
 library(plotly)
 library(tidyverse)
-library(maps)
+library(usmap)
 library(mapproj)
 library(patchwork)
+library(sf)
 
 # data import
 
@@ -58,13 +59,23 @@ prisonPopGenPopGraph <- ggplot(prisonPopGenPop, aes(x=year_gen_pop)) +
 ggplotly(prisonPopGenPopGraph)
 
 # --------------- Map ---------------
-  # Proportion of black incarcerated persons by state
-  # Columns to use
-    # State
-    # black_jail_pop
-    # black_prison_pop
-    # total_jail_pop 
-    # total_prison_pop
+
+blackIncPop <- veraDataCounty %>%
+  group_by(state) %>%
+  mutate(state_black_prison_pop = (sum(black_jail_pop, na.rm = TRUE) + sum(black_prison_pop, na.rm = TRUE)),
+         state_prison_pop = sum(total_jail_pop, na.rm = TRUE) + sum(total_prison_pop, na.rm = TRUE),
+         prop_black_pop = (state_black_prison_pop/state_prison_pop)*100) %>%
+  distinct(state, state_black_prison_pop, state_prison_pop, prop_black_pop)
+
+colnames(blackIncPop) <- c('state','State Black Prison Pop','State Prison Pop','Proportion Of Prison Population')
+
+usIncarcerationMap <- plot_usmap(data = blackIncPop,
+                                 values = "Proportion Of Prison Population") + 
+      scale_fill_continuous(low = "white", high = "red",name = "Incarcerated Population (%)") +
+      theme(legend.position = "right", panel.background = element_rect(color = "black", fill = "lightblue")) + 
+      labs(title = "Percentage of Overall US Prison Pupulation That Are Black, by State, From 1970 to 2018")
+ 
+ggplotly(usIncarcerationMap)
 
 
 # --------------- Values ---------------
@@ -75,6 +86,8 @@ blackMaxRate <- max(prisonPopRace$year_black_JoP_pop)
 latinxMaxRate <- max(prisonPopRace$year_latinx_JoP_pop)
 nativeMaxRate <- max(prisonPopRace$year_native_JoP_pop)
 whiteMaxRate <- max(prisonPopRace$year_white_JoP_pop)
+natAvgRate <- mean(aapiMaxRate + blackMaxRate + latinxMaxRate + nativeMaxRate + whiteMaxRate)
+blackVsAvg <- natAvgRate / blackMaxRate  
 
   # tells us that for every 59.17 people we add, one of them will go to prison
 rocGenPrisonPop <- 1/((prisonPopGenPop$year_prison_pop[19] - prisonPopGenPop$year_prison_pop[1]) / (prisonPopGenPop$year_gen_pop[19] - prisonPopGenPop$year_gen_pop[1]))

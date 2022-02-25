@@ -1,5 +1,5 @@
 ---
-title: "SomethingIGottaChangeBeforeISumbitThis"
+title: "Unequal Justice: US Incarceration"
 output: html_document
 ---
 
@@ -15,10 +15,19 @@ library(knitr)
 * **Date:** Winter 2022
 
 <!-- Introduction -->
+### Introduction:
+The United States has an absolutely massive prison population, with over 2 million people behind bars. While this number is tragic, in and of itself, those 2 million people are disproportionately black people and other minorities. White Americans are a much lower percentage of the prison population than what their proportion of the general US population would lead one to believe.
 
+The unfair treatment of black Americans by our criminal justice system and police forces have been plainly documented, from Jim Crow to excessive police force. This project will explore exactly how much more negatively affected these people are when compared to other demographic groups in the United States
 
 <!-- Summary Paragraph -->
+### Summary:
+As can be seen in the chart "Percentage of US Population in Prison or Jail, by Race," black Americans are disproportionately and negatively affected by our criminal justice system to a far greater extent than individuals from any other demographic group. The all-time maximum percentage of incarcerated population for black Americans sits at `r blackMaxRate` percent, with the next highest maximum, Native Americans, sitting at `r nativeMaxRate` percent, and the national maximum average at `r natAvgRate` percent, far far lower than that seen by Black Americans. This shows us that at one point, black Americans were facing incarceration at `r blackVsAvg` times the rate than the highest the national average has ever been.
 
+We know that these numbers are not a result of a single population growing faster than others, or anything of that kind, as the general relationship between increasing general and prison populations is that for every `r rocGenPrisonPop` people who are born, one will go to prison, which is not near many of the rates at which various demographics in the US face. We see that several groups' maximums are below this theoretical value, chiefly white Americans `r whiteMaxRate` percent, which goes to show that there are absolutely demographic groups in the nation who are at an advantage from our unfair system.
+
+<!-- Data -->
+### Data:
 
 <!-- Trend Chart -->
 ```{r, chart_1, echo = FALSE, warning=FALSE, message=FALSE}
@@ -28,11 +37,15 @@ ggplotly(incarceratedPopProp)
 This chart displays how some ethnic groups are imprisoned at much higher rates than others. As can be plainly seen, Black people in the United States face a much higher proportional rate of incarceration compared to any other demographic. This stems from racist policies that over-police certain populations, along side many other institutionalized factors. As the graph is scaled as a proportion of the total population of each demographic, year over year, factors like larger populations will not skew the data.
 
 <!-- Compare Chart -->
-```{r, chart_1, echo = FALSE, warning=FALSE, message=FALSE}
+```{r, chart_2, echo = FALSE, warning=FALSE, message=FALSE}
 ggplotly(prisonPopGenPopGraph)
 
 ```
 We can clearly see that as population in the US increases, the prison population has, until recent years, increased alongside it. This implies that we should see a steady and equal increase in prison population by demographic, which is wholly not the case. As we can see from our proportion table above, those who are actually affected by this steady increase are minorities, and white people see incarceration at a much lower rate.
 
 <!-- Map -->
+```{r, chart_3, echo = FALSE, warning=FALSE, message=FALSE}
+ggplotly(usIncarcerationMap)
 
+```
+Our previous charts display the disproportionate rates at which black people are targeted and imprisoned by our countries justice system. With this map, we can also see where this kind a treatment tends to be prevalent, with darker shades of red marking higher proportions of black people imprisoned in those states. As we can see, the area known as the "deep south" has a very large proportion of their prison population containing black people, which is more than likely a leftover of past legislation (think jim crow, etc) and current legislation and policing practices in those regions.
