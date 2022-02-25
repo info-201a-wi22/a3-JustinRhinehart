@@ -4,9 +4,10 @@ output: html_document
 ---
 
 
-<!-- Source File -->
+<!-- Source File & Packages -->
 ```{r, source, echo = FALSE, warning=FALSE, include=FALSE}
 source("../source/analysis.R")
+library(knitr)
 ```
 <!-- General Info -->
 * **Author:** Justin Rhinehart @ jjrhine@uw.edu
@@ -20,10 +21,18 @@ source("../source/analysis.R")
 
 
 <!-- Trend Chart -->
+```{r, chart_1, echo = FALSE, warning=FALSE, message=FALSE}
+ggplotly(incarceratedPopProp)
 
+```
+This chart displays how some ethnic groups are imprisoned at much higher rates than others. As can be plainly seen, Black people in the United States face a much higher proportional rate of incarceration compared to any other demographic. This stems from racist policies that over-police certain populations, along side many other institutionalized factors. As the graph is scaled as a proportion of the total population of each demographic, year over year, factors like larger populations will not skew the data.
 
 <!-- Compare Chart -->
+```{r, chart_1, echo = FALSE, warning=FALSE, message=FALSE}
+ggplotly(prisonPopGenPopGraph)
 
+```
+We can clearly see that as population in the US increases, the prison population has, until recent years, increased alongside it. This implies that we should see a steady and equal increase in prison population by demographic, which is wholly not the case. As we can see from our proportion table above, those who are actually affected by this steady increase are minorities, and white people see incarceration at a much lower rate.
 
 <!-- Map -->
 
